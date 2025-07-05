@@ -1,0 +1,53 @@
+
+    .error-message {
+      display: none;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .error-message.active {
+      display: block;
+      animation: slideIn 0.3s ease;
+    }
+    
+    .error-message.error {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+      color: white;
+      border-left: 4px solid #c0392b;
+    }
+    
+    .error-message.success {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: white;
+      border-left: 4px solid #229954;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Optional: Add a checkmark icon for success */
+    .error-message.success::before {
+      content: "✓ ";
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    
+    /* Optional: Add an X icon for errors */
+    .error-message.error::before {
+      content: "✗ ";
+      font-weight: bold;
+      margin-right: 8px;
+    }

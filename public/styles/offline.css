@@ -1,0 +1,24 @@
+/* offline.css */
+#offline-notification {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #ff6b6b, #f5576c);
+    color: #fff;
+    padding: 18px 40px;
+    border-radius: 0 0 16px 16px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 8px 24px rgba(255, 107, 107, 0.15);
+    z-index: 9999;
+    text-align: center;
+    letter-spacing: 1px;
+    animation: slideDown 0.5s;
+  }
+  
+  @keyframes slideDown {
+    from { top: -60px; opacity: 0; }
+    to { top: 0; opacity: 1; }
+  }

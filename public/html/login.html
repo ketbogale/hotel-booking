@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="../styles/login.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Sign In</h2>
+    <div class="error-message" id="errorMsg"></div>
+    <form id="loginForm" autocomplete="off">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+        <a href="#" id="forgotPasswordLink" class="forgot-link">Forgot password?</a>
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <div class="form-footer">
+      Don't have an account? <a href="register.html">Sign up</a>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotPasswordModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeForgotModal">&times;</span>
+      <h3>Forgot Password?</h3>
+      <p>Enter your registered email address and we'll send you instructions to reset your password.</p>
+      <input type="email" id="forgotEmail" placeholder="Enter your email" required>
+      <button id="sendResetBtn" class="login-btn">Send Reset Link</button>
+      <div id="forgotMsg" class="error-message"></div>
+    </div>
+  </div>
+
+  <script src="../js/login.js"></script>
+</body>
+</html>

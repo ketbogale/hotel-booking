@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Dates and Guests</title>
+  <link rel="stylesheet" href="../styles/booking.css">
+</head>
+<body>
+  
+  <div class="modal-bg">
+    <div class="modal">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <h2>Select Dates and Guests</h2>
+      <form id="bookingForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="checkin">Check-In date</label>
+            <div class="input-icon">
+  <span class="icon" id="checkinIcon">&#128197;</span>
+  <input type="date" id="checkin" required>
+</div>
+          </div>
+          <div class="form-group">
+            <label for="checkout">Checkout date</label>
+            <div class="input-icon">
+  <span class="icon" id="checkoutIcon">&#128197;</span>
+  <input type="date" id="checkout" required>
+</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="rooms">Rooms & Guests</label>
+            <select id="rooms">
+              <option>1 Room, 1 Guest</option>
+              <option>1 Room, 2 Guests</option>
+              <option>2 Rooms, 2 Guests</option>
+              <option>2 Rooms, 4 Guests</option>
+            </select>
+            <div class="checkbox-row">
+              <input type="checkbox" id="accessible">
+              <label for="accessible">Accessible Room</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rate">Special Rates</label>
+            <select id="rate">
+              <option>Select Rate</option>
+              <option>Member Rate</option>
+              <option>Corporate Rate</option>
+              <option>Government Rate</option>
+            </select>
+            <div class="checkbox-row">
+              <input type="checkbox" id="points">
+              <label for="points">Use Points</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" onclick="window.location.href= 'payment.html'" class="book-btn">BOOK NOW</button>
+      </form>
+    </div>
+  </div>
+  <script src="../js/booking.js"></script>
+</body>
+</html>
