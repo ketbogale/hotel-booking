@@ -3,8 +3,10 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const transporter = require('../config/mailer');
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
 const emailStyles = require('../email/emailStyles');
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+
 
 // Test email function
 exports.testEmail = async (req, res) => {
@@ -299,17 +301,41 @@ exports.resetPassword = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
+    // 1. Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.json({ success: false });
+      return res.json({ success: false, message: 'Invalid email or password' });
     }
+    // 2. Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.json({ success: false });
+      return res.json({ success: false, message: 'Invalid email or password' });
     }
-    // Optionally: set session/cookie here
-    res.json({ success: true });
+    // 3. Create JWT token
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    // 4. Respond with token
+    res.json({ success: true, token });
   } catch (err) {
-    res.status(500).json({ success: false });
+    res.status(500).json({ success: false, message: 'Server error' });
   }
+};
+// Get user profile
+exports.getProfile = async (req, res) => {
+  // Assume user ID is in req.user.id (set by auth middleware)
+  const user = await User.findById(req.user.id).select('-password -resetPasswordToken -resetPasswordExpires');
+  res.json(user);
+};
+
+// Update user profile
+exports.updateProfile = async (req, res) => {
+  const { name, email, password } = req.body;
+  const update = { name, email };
+  if (req.file) {
+    update.profilePicture = req.file.filename;
+  }
+  if (password) {
+    update.password = await bcrypt.hash(password, 10);
+  }
+  const user = await User.findByIdAndUpdate(req.user.id, update, { new: true }).select('-password');
+  res.json(user);
 };
