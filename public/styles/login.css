@@ -13,12 +13,12 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  
 }
 
 .login-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: #241654;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.95);
 -webkit-backdrop-filter: blur(10px);
 backdrop-filter: blur(10px);
 border-radius: 20px;
@@ -38,8 +38,7 @@ box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
-  animation: gradientShift 3s ease infinite;
+
 }
 
 @keyframes gradientShift {
@@ -157,7 +156,7 @@ form {
 
 .form-group label {
   display: block;
-  color: #34495e;
+  color: whitesmoke;
   font-weight: 600;
   margin-bottom: 8px;
   font-size: 14px;
@@ -185,7 +184,6 @@ form {
 
 .form-group input::placeholder {
   color: #95a5a6;
-  font-style: italic;
 }
 
 /* Button Styles */

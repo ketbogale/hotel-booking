@@ -111,11 +111,12 @@ body {
 
 /* Main Navigation */
 /* ...existing code... */
+
 .main-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #4a5861 60%, #5eb6e6 100%);
+  background: #231c4c;
   padding: 0.7rem 2vw;
   position: sticky;
   left: 0;
@@ -123,6 +124,7 @@ body {
   top: 0;
   z-index: 100;
   transition: background 0.3s, box-shadow 0.3s;
+  border-bottom: 1px solid gold;
 }
 
 /* Add this new class for scrolled state */
@@ -135,6 +137,7 @@ body {
   align-items: center;
   gap: 1.2rem;
 }
+
 .menu-btn {
   background: none;
   border: none;
@@ -284,15 +287,11 @@ body {
   transition: opacity 0.3s;
 }
 
-.side-menu-overlay.open {
-  display: block;
-  opacity: 1;
-}
 .side-menu {
   position: fixed;
   top: 0; left: 0;
-  width: 420px;
-  max-width: 95vw;
+  width: 400px;
+  max-width: 90vw;
   height: 100vh;
   background: #231c4c;
   color: #fff;
@@ -318,9 +317,14 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 1.5rem 1.2rem 1.5rem;
-  border-bottom: 1px solid #3a3470;
+  border-bottom: 1px solid goldenrod;
 }
-
+.side-menu-header {
+  background: rgb(36, 117, 36);
+}
+.fas fa-bars{
+  background: whitesmoke;
+}
 .close-btn {
   font-size: 2rem;
   cursor: pointer;
@@ -358,25 +362,6 @@ body {
   background: rgba(255,255,255,0.05);
   border-radius: 4px;
   cursor: pointer !important;
-}
-
-.hotel-info strong {
-  letter-spacing: 1px;
-  font-size: 1.1rem;
-  color: #231c4c;
-}
-
-.hotel-info span {
-  display: inline-block;
-  margin-right: 1.5rem;
-  margin-top: 0.7rem;
-  color: #222;
-  font-size: 1rem;
-}
-
-.hotel-info i {
-  margin-right: 0.4rem;
-  color: #231c4c;
 }
 
 @media (max-width: 600px) {

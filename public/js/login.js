@@ -36,8 +36,30 @@ loginForm.addEventListener('submit', async function(e) {
       body: JSON.stringify({ email, password })
     });
     const result = await response.json();
-    if (result.success) {
-      window.location.href = "../html/index.html";
+    if (result.success && result.token) {
+      localStorage.setItem('token', result.token);
+      // Fetch user profile after login to get name and email
+      fetch('http://localhost:5000/api/auth/me', {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + result.token }
+      })
+      .then(res => res.json())
+      .then(user => {
+        if (user && user.email) {
+          localStorage.setItem('user', JSON.stringify({
+            name: (user.firstName ? user.firstName + ' ' : '') + (user.lastName || ''),
+            email: user.email
+          }));
+        }
+        // Redirect to intended page or home
+        const redirect = localStorage.getItem('redirectAfterLogin');
+        if (redirect) {
+          localStorage.removeItem('redirectAfterLogin');
+          window.location.href = redirect;
+        } else {
+          window.location.href = 'index.html';
+        }
+      });
     } else {
       errorMsg.textContent = 'Invalid email or password.';
       errorMsg.className = 'error-message active error';

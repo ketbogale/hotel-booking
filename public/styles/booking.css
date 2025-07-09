@@ -87,7 +87,6 @@ input[type="date"] {
   background: transparent;
   color: #241654;
 }
-
 select {
   border: 1px solid #241654;
   border-radius: 2px;
@@ -96,16 +95,6 @@ select {
   background: #fff;
   color: #241654;
   margin-bottom: 8px;
-}
-
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  margin-top: 4px;
-}
-
-.checkbox-row input[type="checkbox"] {
-  margin-right: 8px;
 }
 
 .book-btn {
@@ -125,6 +114,74 @@ select {
 .book-btn:hover {
   background: #2d2154;
   color: #fff;
+}
+
+.error-message {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  background: linear-gradient(90deg, #e74c3c 60%, #c0392b 100%);
+  padding: 14px 20px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.08rem;
+  box-shadow: 0 2px 12px rgba(231, 76, 60, 0.12);
+  border-left: 6px solid #fff;
+  position: relative;
+  animation: fadeInError 0.4s;
+}
+
+.error-message::before {
+  content: "\26A0"; /* Unicode warning icon */
+  font-size: 1.4em;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+@keyframes fadeInError {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.success-message {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #27ae60 60%, #2ecc71 100%);
+  color: #fff;
+  padding: 18px 36px;
+  border-radius: 8px;
+  font-size: 1.15rem;
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(39, 174, 96, 0.15);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  animation: slideDownFade 2.5s forwards;
+}
+
+@keyframes slideDownFade {
+  0% {
+    opacity: 0;
+    top: 0;
+  }
+  15% {
+    opacity: 1;
+    top: 30px;
+  }
+  85% {
+    opacity: 1;
+    top: 30px;
+  }
+  100% {
+    opacity: 0;
+    top: 0;
+  }
 }
 
 /* ----------- Responsive Styles ----------- */
@@ -168,5 +225,11 @@ select {
   }
   .modal-bg {
     padding: 0;
+  }
+  .error-message {
+    font-size: 0.98rem;
+    padding: 10px 8px;
+    margin-bottom: 12px;
+    border-radius: 4px;
   }
 }

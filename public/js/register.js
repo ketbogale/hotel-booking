@@ -8,6 +8,24 @@ document.getElementById('registerForm').addEventListener('submit', async functio
   const password = document.getElementById('password').value.trim();
   const errorDiv = document.getElementById('errorMsg');
   const submitBtn = document.querySelector('.login-btn');
+    // Simple validation
+    if (!firstname || !lastname || !email || !password) {
+      showError("Please fill in all fields.");
+      return;
+    }
+  
+    // Email format validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      showError("Please enter a valid email address.");
+      return;
+    }
+  
+    // Password length validation
+    if (password.length < 6) {
+      showError("Password must be at least 6 characters.");
+      return;
+    }
 
   // Helper to show error
   function showError(message) {
@@ -44,25 +62,6 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     }
   }
 
-  // Simple validation
-  if (!firstname || !lastname || !email || !password) {
-    showError("Please fill in all fields.");
-    return;
-  }
-
-  // Email format validation
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    showError("Please enter a valid email address.");
-    return;
-  }
-
-  // Password length validation
-  if (password.length < 6) {
-    showError("Password must be at least 6 characters.");
-    return;
-  }
-
   // Prepare data to send
   const formData = {
     firstName: firstname,
@@ -93,7 +92,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
       // Redirect to login page after 3 seconds
       setTimeout(() => {
         this.reset();
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       }, 3000);
     }
   } catch (err) {
