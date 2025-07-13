@@ -173,7 +173,7 @@ exports.register = async (req, res) => {
               <p><strong>🆔 Account Status:</strong> <span style="color: #27ae60; font-weight: bold;">✓ Active</span></p>
             </div>
             <div style="text-align: center; margin: 30px 0;">
-              <a href="http://localhost:5000/login.html" class="button">
+              <a href="http://localhost:5000/html/login.html" class="button">
                 🚀 Login to Your Account
               </a>
             </div>
@@ -237,8 +237,16 @@ exports.forgotPassword = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
 
+    // Debug log for token creation
+    console.log('RESET TOKEN SAVED:', {
+      email: user.email,
+      token: user.resetPasswordToken,
+      expires: user.resetPasswordExpires,
+      now: Date.now()
+    });
+
     // Attractive email
-    const resetLink = `http://localhost:5000/reset-password.html?token=${token}`;
+    const resetLink = `http://localhost:5000/html/reset-password.html?token=${token}`;
     const html = `
       <html>
         <head>
@@ -280,6 +288,7 @@ exports.forgotPassword = async (req, res) => {
 };
 exports.resetPassword = async (req, res) => {
   const { token, password } = req.body;
+  console.log('RESET PASSWORD:', { token, password }); // <-- Add this line
   try {
     const user = await User.findOne({
       resetPasswordToken: token,

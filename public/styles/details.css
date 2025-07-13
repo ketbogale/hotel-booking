@@ -56,7 +56,6 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #231c4c;
   padding: 0.7rem 2vw;
   position: sticky;
   left: 0;
@@ -69,7 +68,7 @@ a {
 /* Add this new class for scrolled state */
 .main-nav.scrolled {
   /*background: #22303a; */
-   background: #231c4c;
+   background: hsl(249, 60%, 43%);
   box-shadow: 0 2px 16px rgba(44,62,80,0.13);
 }
 .nav-left, .nav-center, .nav-right {

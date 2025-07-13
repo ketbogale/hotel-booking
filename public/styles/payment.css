@@ -7,6 +7,28 @@ body {
   min-height: 100vh;
 }
 
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 10;
+}
+
+.page-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.page-logo:hover {
+  transform: scale(1.05);
+}
+
 .payment-container {
   background: #fff;
   border-radius: 18px;

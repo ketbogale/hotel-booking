@@ -16,7 +16,7 @@
       if (!user || !user.email) {
         // Store intended page for redirect after login
         localStorage.setItem('redirectAfterLogin', currentPath);
-        window.location.href = 'login.html';
+        window.location.href = 'html/login.html';
       }
     }
   })();

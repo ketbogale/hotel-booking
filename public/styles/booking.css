@@ -4,21 +4,80 @@ body {
   background: #241654;
 }
 
-.modal-bg {
-  min-height: 100vh;
+.auth-page-wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 16px;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100vw;
 }
-
+.logo-container {
+  text-align: center;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 10;
+}
+.page-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #f0f0f0 0%, #e0e0e0 100%);
+  box-shadow:
+    0 8px 24px rgba(36, 22, 84, 0.25),
+    0 1.5px 8px rgba(108,99,255,0.08),
+    0 0 0 4px #fff;
+  border: 1.5px solid #d1d9e6;
+  transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+  will-change: transform, box-shadow;
+  margin-bottom: 0;
+  animation: rotate3D 3s infinite cubic-bezier(.4,2,.6,.8);
+}
+.page-logo:hover {
+  transform: translateY(-6px) scale(1.07) rotateX(8deg);
+  box-shadow:
+    0 16px 32px rgba(36, 22, 84, 0.30),
+    0 3px 16px rgba(108,99,255,0.12),
+    0 0 0 4px #fff;
+}
+@keyframes rotate3D {
+  0% {
+    transform: rotateY(0deg) rotateX(0deg) scale(1);
+    box-shadow: 0 8px 24px rgba(36, 22, 84, 0.25), 0 1.5px 8px rgba(108,99,255,0.08), 0 0 0 4px #fff;
+  }
+  25% {
+    transform: rotateY(20deg) rotateX(10deg) scale(1.05);
+    box-shadow: 0 16px 32px rgba(36, 22, 84, 0.30), 0 3px 16px rgba(108,99,255,0.12), 0 0 0 4px #fff;
+  }
+  50% {
+    transform: rotateY(0deg) rotateX(20deg) scale(1.1);
+    box-shadow: 0 8px 24px rgba(36, 22, 84, 0.25), 0 1.5px 8px rgba(108,99,255,0.08), 0 0 0 4px #fff;
+  }
+  75% {
+    transform: rotateY(-20deg) rotateX(10deg) scale(1.05);
+    box-shadow: 0 16px 32px rgba(36, 22, 84, 0.30), 0 3px 16px rgba(108,99,255,0.12), 0 0 0 4px #fff;
+  }
+  100% {
+    transform: rotateY(0deg) rotateX(0deg) scale(1);
+    box-shadow: 0 8px 24px rgba(36, 22, 84, 0.25), 0 1.5px 8px rgba(108,99,255,0.08), 0 0 0 4px #fff;
+  }
+}
+.modal-bg {
+  min-height: unset;
+  padding-top: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
 .modal {
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 8px 32px rgba(36, 22, 84, 0.3);
-  padding: 40px 32px 32px 32px;
-  width: 700px;
-  max-width: 100%;
+  padding: 28px 24px 24px 24px;
+  width: 450px;
+  max-width: 95vw;
   position: relative;
   box-sizing: border-box;
 }

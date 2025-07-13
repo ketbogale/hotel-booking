@@ -129,7 +129,7 @@ body {
 
 /* Add this new class for scrolled state */
 .main-nav.scrolled {
-  background: #22303a;
+  background: hsl(249, 60%, 43%);
   box-shadow: 0 2px 16px rgba(44,62,80,0.13);
 }
 .nav-left {

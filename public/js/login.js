@@ -1,3 +1,6 @@
+// Load configuration
+// Make sure config.js is loaded before this file in your HTML
+
 const loginForm = document.getElementById('loginForm');
 const errorMsg = document.getElementById('errorMsg');
 

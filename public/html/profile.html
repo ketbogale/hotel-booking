@@ -1,276 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - Hotel Booking</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../styles/profile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User | profile</title>
+  <link rel="icon" type="image/png" href="../src/image/favivon-logo.png">
+  <link rel="shortcut icon" type="image/png" href="../src/image/favivon-logo.jpg">
+  <link rel="stylesheet" href="../styles/profile.css" />
+  <!-- For icons, we use Font Awesome CDN (or you can use any icon library you prefer) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 </head>
 <body>
-    <div class="container">
-        <div class="profile-header">
-            <h1><i class="fas fa-user-circle"></i> My Profile</h1>
-            <p>Manage your account settings and preferences</p>
-        </div>
-
-        <div class="profile-container">
-            <!-- Sidebar Navigation -->
-            <div class="sidebar">
-                <div class="user-info">
-                    <div class="profile-pic-container">
-                        <img id="profilePic" src="../assets/default-avatar.png" alt="Profile Picture" />
-                        <div class="upload-overlay">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                    </div>
-                    <h3 id="userName">User Name</h3>
-                    <p id="userEmail">user@email.com</p>
-                </div>
-
-                <nav class="nav-tabs">
-                    <button class="tab-btn active" data-tab="profile">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </button>
-                    <button class="tab-btn" data-tab="settings">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
-                    </button>
-                    <button class="tab-btn" data-tab="notifications">
-                        <i class="fas fa-bell"></i>
-                        <span>Notifications</span>
-                        <span class="notification-badge">3</span>
-                    </button>
-                    <button class="tab-btn" data-tab="history">
-                        <i class="fas fa-history"></i>
-                        <span>Booking History</span>
-                    </button>
-                </nav>
-            </div>
-
-            <!-- Tab Content -->
-            <div class="content-area">
-                <!-- Profile Tab -->
-                <div class="tab-content active" id="profile-tab">
-                    <div class="tab-header">
-                        <h2><i class="fas fa-user"></i> Personal Information</h2>
-                        <p>Update your personal details and profile picture</p>
-                    </div>
-                    
-                    <form id="profileForm" enctype="multipart/form-data" class="profile-form">
-                        <div class="form-group">
-                            <label for="profilePicture">Profile Picture</label>
-                            <div class="file-input-wrapper">
-        <input type="file" id="profilePicture" name="profilePicture" accept="image/*" />
-                                <div class="file-input-display">
-                                    <i class="fas fa-upload"></i>
-                                    <span>Choose a file</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="Enter email address" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Enter phone number" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">Address</label>
-                            <textarea id="address" name="address" placeholder="Enter your address" rows="3"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-primary">
-                            <i class="fas fa-save"></i> Save Changes
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Settings Tab -->
-                <div class="tab-content" id="settings-tab">
-                    <div class="tab-header">
-                        <h2><i class="fas fa-cog"></i> Account Settings</h2>
-                        <p>Manage your account preferences and security</p>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3><i class="fas fa-lock"></i> Change Password</h3>
-                        <form id="passwordForm" class="settings-form">
-                            <div class="form-group">
-                                <label for="currentPassword">Current Password</label>
-                                <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter current password" />
-                            </div>
-                            <div class="form-group">
-                                <label for="newPassword">New Password</label>
-                                <input type="password" id="newPassword" name="newPassword" placeholder="Enter new password" />
-                            </div>
-                            <div class="form-group">
-                                <label for="confirmPassword">Confirm New Password</label>
-                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm new password" />
-                            </div>
-                            <button type="submit" class="btn-primary">
-                                <i class="fas fa-key"></i> Update Password
-                            </button>
-      </form>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3><i class="fas fa-bell"></i> Notification Preferences</h3>
-                        <div class="preferences">
-                            <div class="preference-item">
-                                <label class="toggle-label">
-                                    <input type="checkbox" id="emailNotif" checked />
-                                    <span class="toggle-slider"></span>
-                                    Email Notifications
-                                </label>
-                            </div>
-                            <div class="preference-item">
-                                <label class="toggle-label">
-                                    <input type="checkbox" id="smsNotif" />
-                                    <span class="toggle-slider"></span>
-                                    SMS Notifications
-                                </label>
-                            </div>
-                            <div class="preference-item">
-                                <label class="toggle-label">
-                                    <input type="checkbox" id="promoNotif" checked />
-                                    <span class="toggle-slider"></span>
-                                    Promotional Offers
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Notifications Tab -->
-                <div class="tab-content" id="notifications-tab">
-                    <div class="tab-header">
-                        <h2><i class="fas fa-bell"></i> Notifications</h2>
-                        <p>Stay updated with your latest notifications</p>
-                    </div>
-
-                    <div class="notifications-container">
-                        <div class="notification-item unread">
-                            <div class="notification-icon">
-                                <i class="fas fa-calendar-check"></i>
-                            </div>
-                            <div class="notification-content">
-                                <h4>Booking Confirmed</h4>
-                                <p>Your booking for Hotel Grand Plaza has been confirmed for March 15-17, 2024.</p>
-                                <span class="notification-time">2 hours ago</span>
-                            </div>
-                            <button class="mark-read-btn" title="Mark as read">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </div>
-
-                        <div class="notification-item unread">
-                            <div class="notification-icon">
-                                <i class="fas fa-percentage"></i>
-                            </div>
-                            <div class="notification-content">
-                                <h4>Special Offer</h4>
-                                <p>Get 20% off on your next booking! Use code SAVE20 at checkout.</p>
-                                <span class="notification-time">1 day ago</span>
-                            </div>
-                            <button class="mark-read-btn" title="Mark as read">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </div>
-
-                        <div class="notification-item">
-                            <div class="notification-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="notification-content">
-                                <h4>Review Request</h4>
-                                <p>How was your stay at Hotel Grand Plaza? Share your experience!</p>
-                                <span class="notification-time">3 days ago</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Booking History Tab -->
-                <div class="tab-content" id="history-tab">
-                    <div class="tab-header">
-                        <h2><i class="fas fa-history"></i> Booking History</h2>
-                        <p>View all your past and current bookings</p>
-                    </div>
-
-                    <div class="booking-filters">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="upcoming">Upcoming</button>
-                        <button class="filter-btn" data-filter="completed">Completed</button>
-                        <button class="filter-btn" data-filter="cancelled">Cancelled</button>
-                    </div>
-
-                    <div class="bookings-container">
-                        <div class="booking-item upcoming">
-                            <div class="booking-image">
-                                <img src="../assets/hotel1.jpg" alt="Hotel Grand Plaza" />
-                            </div>
-                            <div class="booking-details">
-                                <h4>Hotel Grand Plaza</h4>
-                                <p><i class="fas fa-calendar"></i> March 15-17, 2024</p>
-                                <p><i class="fas fa-users"></i> 2 Adults, 1 Room</p>
-                                <p><i class="fas fa-map-marker-alt"></i> New York, NY</p>
-                                <span class="booking-status upcoming">Upcoming</span>
-                            </div>
-                            <div class="booking-actions">
-                                <button class="btn-secondary">
-                                    <i class="fas fa-eye"></i> View Details
-                                </button>
-                                <button class="btn-danger">
-                                    <i class="fas fa-times"></i> Cancel
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="booking-item completed">
-                            <div class="booking-image">
-                                <img src="../assets/hotel2.jpg" alt="Seaside Resort" />
-                            </div>
-                            <div class="booking-details">
-                                <h4>Seaside Resort</h4>
-                                <p><i class="fas fa-calendar"></i> January 10-12, 2024</p>
-                                <p><i class="fas fa-users"></i> 2 Adults, 1 Room</p>
-                                <p><i class="fas fa-map-marker-alt"></i> Miami, FL</p>
-                                <span class="booking-status completed">Completed</span>
-                            </div>
-                            <div class="booking-actions">
-                                <button class="btn-secondary">
-                                    <i class="fas fa-eye"></i> View Details
-                                </button>
-                                <button class="btn-primary">
-                                    <i class="fas fa-star"></i> Review
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Message Display -->
-        <div id="profileMsg" class="message-container"></div>
+  <div class="sidebar-container">
+    <div class="profile-header">
+      <img src="../src/image/profile-image.jpg" alt="Profile" class="profile-img"/>
+      <div class="profile-info">
+        <div class="profile-name">Ketema Bogale</div>
+        <div class="profile-email">ket1boggood@gmail.com</div>
+        <button class="edit-btn">Edit Profile</button>
+      </div>
     </div>
- <script src="../js/profile.js"></script>
+    <div class="sidebar-list">
+      <a href="index.html" class="sidebar-item"><i class="fas fa-home"></i> Home <span>&gt;</span></a>
+      <a href="#" class="sidebar-item"><i class="fa-regular fa-bell"></i> Notifications <span>&gt;</span></a>
+      <a href="#" class="sidebar-item"><i class="fa-solid fa-gear"></i> Settings <span>&gt;</span></a>
+      <hr>
+      <a href="#" class="sidebar-item"><i class="fa-solid fa-calendar-check"></i> Booking History <span>&gt;</span></a>
+      <a href="#" class="sidebar-item"><i class="fa-solid fa-location-dot"></i> Location <span>&gt;</span></a>
+      <a href="#" class="sidebar-item"><i class="fas fa-sign-out"></i> Log out<span>&gt;</span></a>
+      <hr>
+    </div>
+  </div>
+  <!-- Edit Profile Modal -->
+  <div id="editProfileModal" class="edit-profile-modal">
+    <div class="edit-profile-content">
+      <span class="close-btn" id="closeEditProfile">&times;</span>
+      <div class="edit-profile-header">
+        <img src="../src/image/profile-image.jpg" alt="Profile" class="edit-profile-img" id="editProfileImgPreview"/>
+        <input type="file" id="editProfileImgInput" accept="image/*" style="display:none;" />
+        <div class="edit-profile-camera" id="editProfileCameraBtn">
+          <i class="fa fa-camera"></i>
+        </div>
+      </div>
+      <h2>Edit Profile</h2>
+      <form class="edit-profile-form">
+        <label>First Name</label>
+        <input type="text" value="" placeholder="First Name" />
+        <label>Last Name</label>
+        <input type="text" value="" placeholder="Last Name" />
+        <label>Username</label>
+        <input type="text" value="" placeholder="Username" />
+        <button type="submit" class="save-btn">Save Changes</button>
+      </form>
+    </div>
+  </div>
+  <script src="../js/authGuard.js"></script>
+  <script src="../js/profile.js"></script>
 </body>
 </html>

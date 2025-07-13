@@ -75,7 +75,7 @@ bookingForm.addEventListener('submit', function(e) {
   const user = JSON.parse(localStorage.getItem('user'));
   const token = localStorage.getItem('token');
   if (!user || !user.email || !token) {
-    window.location.href = 'login.html';
+    window.location.href = 'html/login.html';
     return;
   }
 
