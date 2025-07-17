@@ -49,7 +49,7 @@ module.exports = `
   }
   
   .header h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
     margin: 0;
     position: relative;

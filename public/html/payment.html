@@ -2,46 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Payment | Africa Hotel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="../src/image/favivon-logo.png">
-  <link rel="shortcut icon" type="image/png" href="../src/image/favivon-logo.jpg">
+  <title>Hotel Booking Payment</title>
   <link rel="stylesheet" href="../styles/payment.css">
+  <script src="https://js.chapa.co/v1/inline.js"></script>
 </head>
 <body>
-  <div class="auth-page-wrapper">
-    <div class="logo-container">
-      <img src="../src/image/favivon-logo.png" alt="Africa Hotel Logo" class="page-logo">
-    </div>
   <div class="payment-container">
-    <h2>Payment Details</h2>
-    <!--< div id="bookingSummary"> </div>-->
-    <form id="paymentForm">
-      <div class="form-group">
-        <label for="cardName">Cardholder Name</label>
-        <input type="text" id="cardName" required>
-      </div>
-      <div class="form-group">
-        <label for="cardNumber">Card Number</label>
-        <input type="text" id="cardNumber" maxlength="19" required pattern="\\d{16,19}">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="expiry">Expiry Date</label>
-          <input type="text" id="expiry" placeholder="MM/YY" required pattern="\\d{2}/\\d{2}">
+    <img src="../src/image/favivon-logo.png" alt="Hotel Logo">
+    <h2>Africa Hotel Booking</h2>
+    <p>Make Payments Right From Your Website</p>
+    <h3>What you order are here</h3>
+    <div id="bookingSummary"></div>
+    <div id="paymentStatus"></div>
+    <div class="checkout-footer">
+        <div id="chapa-error-container"></div>
+        <div id="chapa-loading-container">
+            <div class="chapa-spinner"></div>
+            <p>Please wait while we process your payment...</p>
         </div>
-        <div class="form-group">
-          <label for="cvv">CVV</label>
-          <input type="password" id="cvv" maxlength="4" required pattern="\\d{3,4}">
-        </div>
-      </div>
-      <button type="submit" class="pay-btn">Pay Now</button>
-      <div id="paymentError" class="error-message" style="display:none;"></div>
-      <div id="paymentSuccess" class="success-message" style="display:none;"></div>
-    </form>
+        <a href="https://checkout.chapa.co/checkout/payment/plI42e8G6e1QGv4K4q1dBAnNUBdSgqwCmZU0dpHBb2Iif" class="chapa-pay-btn" id="chapa-pay-btn">
+            <img src="../src/image/chapa-logo.png" alt="Chapa Logo">
+            Pay with Chapa
+        </a>
     </div>
   </div>
-  <script src="../js/authGuard.js"></script>
   <script src="../js/payment.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+      // Add event listener for the new button to trigger payment
+      document.getElementById('chapa-pay-btn').addEventListener('click', function(e) {
+          e.preventDefault();
+          // Trigger your Chapa payment logic here (e.g., chapa.initialize() or your custom function)
+          chapa.initialize();
+      });
+  </script>
 </body>
 </html>

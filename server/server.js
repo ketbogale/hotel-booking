@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+const app = express();
+
+const paymentRoutes = require('./routes/payment');
 const bookingRoutes = require('./routes/booking');
 
-const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +30,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Import and use routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/booking', bookingRoutes);
+app.use('/api/payment', paymentRoutes);
 
 // ...other routes and middleware...
 

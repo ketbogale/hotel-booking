@@ -4,19 +4,23 @@
     const publicPages = [
       '/public/html/login.html',
       '/public/html/register.html',
-    // (optional: allow home page)
     ];
-  
+
     // Get current path
     const currentPath = window.location.pathname;
-  
+    const user = JSON.parse(localStorage.getItem('user'));
+
     // If not a public page, check login
     if (!publicPages.includes(currentPath)) {
-      const user = JSON.parse(localStorage.getItem('user'));
       if (!user || !user.email) {
         // Store intended page for redirect after login
         localStorage.setItem('redirectAfterLogin', currentPath);
-        window.location.href = 'html/login.html';
+        window.location.href = 'login.html';
+      }
+    } else {
+      // If already logged in, prevent access to login/register
+      if (user && user.email) {
+        window.location.href = 'profile.html'; // or 'index.html' if you prefer
       }
     }
-  })();
+})();

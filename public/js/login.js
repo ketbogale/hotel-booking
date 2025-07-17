@@ -105,11 +105,19 @@ window.addEventListener('click', function(e) {
   if (e.target === forgotModal) forgotModal.style.display = 'none';
 });
 
+function showForgotMsg(message, isSuccess) {
+  forgotMsg.textContent = message;
+  forgotMsg.className = 'error-message active ' + (isSuccess ? 'success' : 'error');
+  setTimeout(() => {
+    forgotMsg.className = 'error-message';
+    forgotMsg.textContent = '';
+  }, 2000);
+}
+
 sendResetBtn.addEventListener('click', async function() {
   const email = forgotEmail.value.trim();
   if (!email) {
-    forgotMsg.textContent = 'Please enter your email address.';
-    forgotMsg.className = 'error-message active error';
+    showForgotMsg('Please enter your email address.', false);
     return;
   }
   // Send request to backend
@@ -120,10 +128,8 @@ sendResetBtn.addEventListener('click', async function() {
       body: JSON.stringify({ email })
     });
     const data = await res.json();
-    forgotMsg.textContent = data.message || 'If this email is registered, you will receive password reset instructions.';
-    forgotMsg.className = 'error-message active success';
+    showForgotMsg(data.message || 'If this email is registered, you will receive password reset instructions.', true);
   } catch (err) {
-    forgotMsg.textContent = 'Something went wrong. Please try again.';
-    forgotMsg.className = 'error-message active error';
+    showForgotMsg('Something went wrong. Please try again.', false);
   }
 });

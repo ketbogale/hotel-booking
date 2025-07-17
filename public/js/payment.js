@@ -1,70 +1,71 @@
-// Display booking summary
-const bookingData = JSON.parse(localStorage.getItem('bookingData') || '{}');
-/*const summaryDiv = document.getElementById('bookingSummary');
-if (bookingData && bookingData.checkin) {
-  // Build summary using DOM methods to avoid linter issues
-  const box = document.createElement('div');
-  box.className = 'summary-box';
-  box.innerHTML =
-    '<strong>Check-In:</strong> ' + bookingData.checkin + '<br>' +
-    '<strong>Checkout:</strong> ' + bookingData.checkout + '<br>' +
-    '<strong>Rooms & Guests:</strong> ' + bookingData.rooms + '<br>' +
-    '<strong>Rate:</strong> ' + (bookingData.rate || 'Standard') + '<br>';
-  summaryDiv.innerHTML = '';
-  summaryDiv.appendChild(box);
-  summaryDiv.innerHTML += '<hr>';
-} else {
-  summaryDiv.innerHTML = '';
-}
-*/
-// Error/success helpers
-function showPaymentError(msg) {
-  const err = document.getElementById('paymentError');
-  err.textContent = msg;
-  err.style.display = 'block';
-  setTimeout(() => { err.style.display = 'none'; }, 3000);
-}
-function showPaymentSuccess(msg) {
-  const succ = document.getElementById('paymentSuccess');
-  succ.textContent = msg;
-  succ.style.display = 'block';
-  setTimeout(() => { succ.style.display = 'none'; }, 3000);
-}
+// public/js/payment.js
 
-// Payment form handler
-document.getElementById('paymentForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+  const bookingData = JSON.parse(localStorage.getItem('bookingData') || '{}');
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const summaryDiv = document.getElementById('bookingSummary');
+  const statusDiv = document.getElementById('paymentStatus');
 
-  // Simple validation
-  const cardName = document.getElementById('cardName').value.trim();
-  const cardNumber = document.getElementById('cardNumber').value.replace(/\\s+/g, '');
-  const expiry = document.getElementById('expiry').value.trim();
-  const cvv = document.getElementById('cvv').value.trim();
-
-  if (!cardName || !cardNumber || !expiry || !cvv) {
-    showPaymentError('Please fill in all payment fields.');
-    return;
-  }
-  if (!/^\\d{16,19}$/.test(cardNumber)) {
-    showPaymentError('Invalid card number.');
-    return;
-  }
-  if (!/^\d{2}\/\d{2}$/.test(expiry)) {
-    showPaymentError('Expiry must be in MM/YY format.');
-    return;
-  }
-  if (!/^\\d{3,4}$/.test(cvv)) {
-    showPaymentError('Invalid CVV.');
-    return;
+  // Show booking details
+  if (bookingData && bookingData.checkin) {
+    summaryDiv.innerHTML = `
+      <div class="summary-item"><span class="summary-icon">📅</span><span class="summary-label">Check-In:</span> <span class="summary-value">${bookingData.checkin}</span></div>
+      <div class="summary-item"><span class="summary-icon">🏁</span><span class="summary-label">Checkout:</span> <span class="summary-value">${bookingData.checkout}</span></div>
+      <div class="summary-item"><span class="summary-icon">🛏️</span><span class="summary-label">Rooms & Guests:</span> <span class="summary-value">${bookingData.rooms}</span></div>
+      <div class="summary-item"><span class="summary-icon">🏷️</span><span class="summary-label">Rate:</span> <span class="summary-value">${bookingData.rate || 'Standard'}</span></div>
+      <div class="summary-item"><span class="summary-icon">💵</span><span class="summary-label">Amount:</span> <span class="summary-value">${bookingData.amount ? bookingData.amount + ' ETB' : '100 ETB'}</span></div>
+    `;
+  } else {
+    summaryDiv.innerHTML = '<em>No booking data found.</em>';
   }
 
-  // (Optional) Send to backend for real payment processing
-  // For demo, just show success
-  showPaymentSuccess('Payment successful! Thank you for your booking.');
+  // Chapa payment integration
+  const payBtn = document.getElementById('payBtn');
+  if (payBtn) {
+    payBtn.onclick = function() {
+      const amount = bookingData.amount || 100;
+      const email = user.email || 'customer@example.com';
+      const firstName = user.name ? user.name.split(' ')[0] : 'First';
+      const lastName = user.name ? user.name.split(' ')[1] || 'Last' : 'Last';
 
-  // Optionally, clear booking data and redirect after a delay
-  setTimeout(() => {
-    localStorage.removeItem('bookingData');
-    window.location.href = 'index.html'; // or a confirmation page
-  }, 2000);
-});
+      ChapaCheckout.init({
+        publicKey: 'CHAPUBK_TEST-Bs25zCzE4kQ2FteIcKUrvxilIFIeiye5', // <-- Use your test public key
+        tx_ref: 'tx-' + Date.now(),
+        amount: amount,
+        currency: 'ETB',
+        email: email,
+        first_name: firstName,
+        last_name: lastName,
+        title: 'Hotel Booking Payment',
+        description: 'Payment for hotel booking',
+        callback: function(response) {
+          fetch('http://localhost:5000/api/payment/verify?tx_ref=' + response.tx_ref, {
+            method: 'GET'
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.status === 'success') {
+              statusDiv.textContent = 'Payment successful! Redirecting...';
+              statusDiv.style.color = '#27ae60';
+              setTimeout(() => {
+                localStorage.removeItem('bookingData');
+                window.location.href = 'thank-you.html';
+              }, 1500);
+            } else {
+              statusDiv.textContent = 'Payment could not be verified.';
+              statusDiv.style.color = '#e74c3c';
+            }
+          })
+          .catch(() => {
+            statusDiv.textContent = 'Error verifying payment.';
+            statusDiv.style.color = '#e74c3c';
+          });
+        },
+        onclose: function() {
+          statusDiv.textContent = 'Payment popup closed.';
+          statusDiv.style.color = '#e67e22';
+        }
+      });
+    };
+  }
+}); 

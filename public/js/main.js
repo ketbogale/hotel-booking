@@ -37,3 +37,41 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     document.getElementById('loginError').style.display = 'block';
   });
 });
+
+// Network status notification for all pages
+function updateNetworkStatus() {
+  let statusDiv = document.getElementById('networkStatus');
+  if (!statusDiv) {
+    statusDiv = document.createElement('div');
+    statusDiv.id = 'networkStatus';
+    document.body.appendChild(statusDiv);
+  }
+  if (navigator.onLine) {
+    statusDiv.textContent = 'You are back online!';
+    statusDiv.className = 'network-status online';
+    statusDiv.style.display = 'block';
+    setTimeout(() => {
+      statusDiv.style.display = 'none';
+    }, 2000);
+  } else {
+    statusDiv.textContent = 'You are offline. Some features may not work.';
+    statusDiv.className = 'network-status offline';
+    statusDiv.style.display = 'block';
+  }
+}
+window.addEventListener('online', updateNetworkStatus);
+window.addEventListener('offline', updateNetworkStatus);
+window.addEventListener('DOMContentLoaded', updateNetworkStatus);
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Support multiple logout buttons
+  const logoutBtns = document.querySelectorAll('#logoutBtn, .logout-btn');
+  logoutBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    });
+  });
+});

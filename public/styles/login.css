@@ -39,6 +39,7 @@ a:hover {
   margin-bottom: 30px;
   position: relative;
   z-index: 10;
+  
 }
 
 .page-logo {
@@ -100,6 +101,7 @@ a:hover {
   max-width: 350px;
   position: relative;
   overflow: hidden;
+  border: 3px solid gold;
 }
 
 .login-container::before {
@@ -415,9 +417,9 @@ form {
   background: #fff;
   border-radius: 16px;
   padding: 32px 28px 24px 28px;
-  max-width: 350px;
-  width: 90%;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+  max-width: 300px;
+  width: 80%;
+  box-shadow: 4px 8px 32px rgba(44, 62, 80, 0.18);
   position: relative;
   text-align: center;
   animation: fadeIn 0.4s;

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Online Store Checkout</title>
+    <link rel="stylesheet" href="../styles/payment.css">
+    <script src="https://js.chapa.co/v1/inline.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #241654 60%, #6c63ff 100%);
+            
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .checkout-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .checkout-header img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .checkout-header h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #333;
+        }
+
+        .checkout-header p {
+            font-size: 19px;
+            color: #2347a8;
+            margin: 5px 0 0;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .order-summary {
+            margin-bottom: 20px;
+        }
+
+        .order-summary h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+
+        .order-summary .item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .order-summary .item .description {
+            color: #555;
+        }
+
+        .order-summary .item .price {
+            color: #333;
+        }
+
+        .order-summary .total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #321bb2;
+            border-radius: 7px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+
+        #chapa-payment-methods {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .checkout-footer {
+            text-align: center;
+        }
+
+        #chapa-pay-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            background-color: #2d2154;
+            color: #f5f5f5f5;
+            border-radius: 5px;
+            height: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        #chapa-pay-button:hover {
+            background-color: #149a2f;
+        }
+
+        #chapa-error-container {
+            color: lab(42.24% 64.58 49.47);
+            font-size: 15px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            display: none;
+            text-align: center;
+        }
+
+        #chapa-loading-container {
+            display: none;
+            text-align: center;
+            margin-top: -23px;
+            border: 40px;
+        }
+
+        .chapa-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #007BFF;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @media (max-width: 600px) {
+  #bookingSummary {
+    gap: 4px !important;
+    margin-top: 4px !important;
+  }
+
+  #bookingSummary .summary-item {
+    padding: 6px 6px !important;
+    font-size: 0.95rem !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  #bookingSummary .summary-label {
+    min-width: 80px !important;
+    font-size: 0.95rem !important;
+  }
+  #bookingSummary .summary-icon {
+    font-size: 1em !important;
+    margin-right: 4px !important;
+  }
+}
+@media (max-width: 600px) {
+  /* Make the payment method icons wrap and shrink */
+  #chapa-payment-methods, .chapa-payment-methods {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  #chapa-payment-methods > div, .chapa-payment-methods > div {
+    flex: 1 1 40% !important;
+    min-width: 90px !important;
+    max-width: 120px !important;
+    margin: 0 2px !important;
+  }
+  /* Make the phone input and country selector stack or shrink */
+  .chapa-phone-input-wrapper, #chapa-phone-input-container {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+  .chapa-phone-input-wrapper input,
+  #chapa-phone-input-container input {
+    width: 100% !important;
+    min-width: 0 !important;
+    font-size: 1rem !important;
+  }
+  /* Make the Pay Now button full width and larger touch area */
+  button#chapa-pay-button, .chapa-pay-button {
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 14px 0 !important;
+    margin-top: 10px !important;
+    border-radius: 8px !important;
+  }
+}
+        /* Make payment method icons and phone input more moderate and smaller by 5px */
+        #chapa-payment-methods, .chapa-payment-methods {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          justify-content: center !important;
+          gap: 8px !important;
+          border: none !important;
+          margin-bottom: 20px !important;
+        }
+        #chapa-payment-methods > div, .chapa-payment-methods > div {
+          min-width: 60px !important;
+          max-width: 80px !important;
+          height: 60px !important;
+          padding: 4px !important;
+          margin: 0 2px !important;
+          background: #fff !important;
+          border: 2px solid #e0e7ff !important;
+          border-radius: 12px !important;
+          box-shadow: 0 2px 8px rgba(52, 96, 219, 0.07) !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        #chapa-payment-methods > div:hover, .chapa-payment-methods > div:hover {
+          border-color: #3460db !important;
+          box-shadow: 0 4px 16px rgba(52, 96, 219, 0.13) !important;
+        }
+        #chapa-payment-methods img, .chapa-payment-methods img {
+          max-width: 48px !important;
+          max-height: 28px !important;
+        }
+        button#chapa-pay-button, .chapa-pay-button {
+          display: block;
+          width: 100%;
+          padding: 14px 0;
+          font-size: 1.1rem;
+          border: 2px solid rgba(21, 53, 158, 0.863);
+          background: #2d1db6f5;
+          color: #fff;
+          border-radius: 10px;
+          height: 50px;
+          font-weight: bold;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(52, 96, 219, 0.07);
+          transition: background 0.3s, border-color 0.2s, box-shadow 0.2s;
+        }
+        button#chapa-pay-button:hover, .chapa-pay-button:hover {
+          background: rgb(8, 111, 8);
+          color: #fff;
+          border: 2px solid gold;
+          box-shadow: 0 4px 16px rgba(52, 96, 219, 0.13);
+        }
+        .chapa-phone-input-wrapper, #chapa-phone-input-container {
+          min-height: 31px !important;
+          font-size: 0.93rem !important;
+        }
+        .chapa-phone-input-wrapper input,
+        #chapa-phone-input-container input {
+          font-size: 0.95rem !important;
+          padding: 1px 3px !important;
+          height: 27px !important;
+        }
+        button#chapa-pay-button, .chapa-pay-button {
+          font-size: 0.95rem !important;
+          padding: 5px 0 !important;
+          border-radius: 1px !important;
+        }
+        @media (max-width: 600px) {
+          #chapa-payment-methods, .chapa-payment-methods {
+            gap: 0px !important;
+          }
+          #chapa-payment-methods > div, .chapa-payment-methods > div {
+            min-width: 45px !important;
+            max-width: 60px !important;
+            height: 45px !important;
+            padding: 0px !important;
+          }
+          #chapa-payment-methods img, .chapa-payment-methods img {
+            max-width: 40px !important;
+            max-height: 18px !important;
+          }
+          .chapa-phone-input-wrapper, #chapa-phone-input-container {
+            min-height: 21px !important;
+            font-size: 0.85rem !important;
+          }
+          .chapa-phone-input-wrapper input,
+          #chapa-phone-input-container input {
+            font-size: 0.85rem !important;
+            padding: 0px 1px !important;
+            height: 18px !important;
+          }
+          button#chapa-pay-button, .chapa-pay-button {
+            font-size: 0.85rem !important;
+            padding: 2px 0 !important;
+            border-radius: 1px !important;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-container">
+        <div class="checkout-header">
+            <img src="../src/image/favivon-logo.png" alt="africa Logo">
+            <h1>Africa Hotel Booking</h1>
+            <p>Make Payments Right From Your Website</p>
+        </div>
+
+        <div class="order-summary">
+            <h2>What you order are here</h2>
+            <div id="bookingSummary" style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;"></div>
+        </div>
+
+        <div id="chapa-inline-form"></div>
+
+        <div class="checkout-footer">
+            <div id="chapa-error-container"></div>
+            <div id="chapa-loading-container">
+                <div class="chapa-spinner"></div>
+                <p>Please wait while we process your payment...</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Show booking summary from localStorage
+        const bookingData = JSON.parse(localStorage.getItem('bookingData') || '{}');
+        const summaryDiv = document.getElementById('bookingSummary');
+        function summaryItem(icon, label, value) {
+          return `<div class=\"summary-item\" style=\"background: #f0f4ff; border-radius: 8px; padding: 8px 12px; margin: 0; box-shadow: 0 1px 4px rgba(52,96,219,0.06); display: flex; align-items: center; gap: 8px; font-size: 1rem;\"><span class=\"summary-icon\" style=\"font-size: 1.1em; color: #3460db; margin-right: 6px;\">${icon}</span><span class=\"summary-label\" style=\"font-weight: bold; min-width: 110px; color: #222;\">${label}</span> <span class=\"summary-value\" style=\"color: #333;\">${value}</span></div>`;
+        }
+        if (bookingData && bookingData.checkin) {
+          summaryDiv.innerHTML =
+            summaryItem('📅', 'Check-In:', bookingData.checkin) +
+            summaryItem('🏁', 'Checkout:', bookingData.checkout) +
+            summaryItem('🛏', 'Rooms & Guests:', bookingData.rooms) +
+            summaryItem('🏷', 'Rate:', bookingData.rate || 'Standard') +
+            summaryItem('💵', 'Amount:', (bookingData.amount ? bookingData.amount + ' ETB' : '1000 ETB'));
+        } else {
+          summaryDiv.innerHTML = '<em>No booking data found.</em>';
+        }
+    </script>
+    <script>
+        const chapa = new ChapaCheckout({
+            publicKey: 'CHAPUBK_TEST-Bs25zCzE4kQ2FteIcKUrvxilIFIeiye5',
+            customizations: {
+                buttonText: 'Pay Now'
+            },
+            availablePaymentMethods: ['chapa', 'cbebirr', 'telebirr', 'mpesa', 'ebirr'],
+            showPaymentMethodsNames: false,
+            amount: '100', 
+            currency: 'ETB',
+            mobile: '', 
+
+        
+            callbackUrl: 'https://webhook.site/9ef322ef-edeb-42e2-b4a3-50b7f1ac4e6f',
+        });
+
+        chapa.initialize();
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/payment.js"></script>
+</body>
+</html>

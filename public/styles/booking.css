@@ -1,7 +1,8 @@
 body {
   margin: 0;
   font-family: 'Montserrat', Arial, sans-serif;
-  background: #241654;
+  background: linear-gradient(135deg, #241654 60%, #6c63ff 100%);
+  min-height: 100vh;
 }
 
 .auth-page-wrapper {
@@ -72,30 +73,24 @@ body {
   justify-content: center;
 }
 .modal {
-  background: #fff;
-  border-radius: 2px;
+  background: whitesmoke;
+  border-radius: 7px;
   box-shadow: 0 8px 32px rgba(36, 22, 84, 0.3);
   padding: 28px 24px 24px 24px;
   width: 450px;
+  max-height: 500px;
   max-width: 95vw;
   position: relative;
   box-sizing: border-box;
-}
-
-.close-btn {
-  position: absolute;
-  top: 32px;
-  right: 32px;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
+  border: 3px solid rgb(0, 255, 76);
+  transition: box-shadow 0.2s;
 }
 
 h2 {
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
+  font-family: sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-align: center;
   margin-bottom: 32px;
   letter-spacing: 1px;
   color: #241654;
@@ -123,8 +118,8 @@ label {
 .input-icon {
   display: flex;
   align-items: center;
-  border: 1px solid #241654;
-  border-radius: 2px;
+  border: 2px solid #28136d;
+  border-radius: 5px;
   background: #fff;
   padding: 0 8px;
   margin-bottom: 8px;
@@ -143,12 +138,12 @@ input[type="date"] {
   font-size: 1rem;
   padding: 12px 0;
   width: 100%;
-  background: transparent;
+  background: #f7f7fb;
   color: #241654;
 }
 select {
-  border: 1px solid #241654;
-  border-radius: 2px;
+  border: 2px solid #2f1681;
+  border-radius: 5px;
   padding: 12px 8px;
   font-size: 1rem;
   background: #fff;
@@ -162,6 +157,7 @@ select {
   border: 2px solid #2d2154;
   color: #2d2154;
   font-weight: 700;
+  border-radius: 28px;
   font-size: 1.1rem;
   padding: 14px 0;
   cursor: pointer;

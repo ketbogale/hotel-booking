@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thank You!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      background: linear-gradient(135deg, #241654 60%, #6c63ff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .thankyou-card {
+      background: #fff;
+      display: inline-block;
+      padding: 36px 32px 32px 32px;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(52, 96, 219, 0.13);
+      min-width: 320px;
+      max-width: 95vw;
+      margin: 24px auto;
+      position: relative;
+    }
+    .success {
+      color: #27ae60;
+      font-size: 2.6em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .success-icon {
+      font-size: 2.2em;
+      background: #eafaf1;
+      border-radius: 50%;
+      padding: 10px 14px;
+      margin-right: 8px;
+      box-shadow: 0 2px 8px rgba(39, 174, 96, 0.08);
+      display: inline-block;
+    }
+    .details h2 {
+      margin-top: 0;
+      color: #241654;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    .details p {
+      color: #444;
+      font-size: 1.08em;
+      margin-bottom: 18px;
+    }
+    .details a {
+      display: inline-block;
+      margin-top: 18px;
+      color: #fff;
+      background: linear-gradient(90deg, #66ff94 0%, #3460db 100%);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 12px 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(52, 96, 219, 0.07);
+      transition: background 0.2s, color 0.2s;
+    }
+    .details a:hover {
+      background: linear-gradient(90deg, #3460db 0%, #e3ff66 100%);
+      color: #fff;
+      text-decoration: none;
+    }
+    @media (max-width: 500px) {
+      .thankyou-card {
+        padding: 10px 2vw 10px 2vw;
+        min-width: 0;
+        max-width: 99vw;
+      }
+      .success {
+        font-size: 1.3em;
+        gap: 6px;
+      }
+      .success-icon {
+        font-size: 1.1em;
+        padding: 6px 8px;
+        margin-right: 4px;
+      }
+      .details h2 {
+        font-size: 1em;
+        margin-bottom: 6px;
+      }
+      .details p {
+        font-size: 0.92em;
+        margin-bottom: 10px;
+      }
+      .details a {
+        padding: 8px 0;
+        width: 100%;
+        font-size: 0.98em;
+        border-radius: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="thankyou-card">
+    <img src="../src/image/favivon-logo.png" alt="Africa Logo" style="display:block; margin:0 auto 18px auto; max-width:80px; width:40vw; height:auto;">
+    <div class="success"><span class="success-icon">✔</span> Payment Successful!</div>
+    <div class="details">
+      <h2>Thank you for your booking!</h2>
+      <p>Your payment has been received.<br>A confirmation email has been sent to you.</p>
+      <a href="index.html">Return to Home</a>
+    </div>
+  </div>
+</body>
+</html> 

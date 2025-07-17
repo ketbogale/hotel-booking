@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="../src/image/favivon-logo.png">
   <link rel="shortcut icon" type="image/png" href="../src/image/favivon-logo.jpg">
   <link rel="stylesheet" href="../styles/booking.css">
+  <link rel="stylesheet" href="../styles/offline.css">
 </head>
 <body>
   <div class="auth-page-wrapper">
@@ -15,7 +16,6 @@
     </div>
     <div class="modal-bg">
       <div class="modal">
-        <button class="close-btn" id="closeModal">&times;</button>
         <h2>Select Dates and Guests</h2>
         <div id="bookingError" class="error-message" style="display:none;"></div>
         <form id="bookingForm">
@@ -48,7 +48,7 @@
             <div class="form-group">
               <label for="rate">Special Rates</label>
               <select id="rate">
-                <option value="">Select Rate</option>
+                <option value="">Standard rate</option>
                 <option value="member">Member Rate</option>
                 <option value="corporate">Corporate Rate</option>
                 <option value="government">Government Rate</option>
@@ -63,5 +63,6 @@
   </div>
   <script src="../js/authGuard.js"></script>
   <script src="../js/booking.js"></script>
+  <script src="../js/main.js"></script>
 </body>
 </html>

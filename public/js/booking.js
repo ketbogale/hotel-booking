@@ -1,7 +1,3 @@
-// Close modal functionality
-document.getElementById('closeModal').addEventListener('click', function() {
-  document.querySelector('.modal-bg').style.display = 'none';
-});
 
 // Date handling functions
 function todayString() {
@@ -22,10 +18,11 @@ const bookingForm = document.getElementById('bookingForm');
 // Set initial dates
 const today = todayString();
 const tomorrow = addDays(today, 1);
-checkin.value = today;
-checkout.value = tomorrow;
-checkin.min = today;
-checkout.min = today;
+const dayAfterTomorrow = addDays(today, 2);
+checkin.value = tomorrow;
+checkout.value = dayAfterTomorrow;
+checkin.min = tomorrow;
+checkout.min = dayAfterTomorrow;
 
 // When check-in changes, update checkout constraints
 checkin.addEventListener('change', function() {
@@ -80,6 +77,10 @@ bookingForm.addEventListener('submit', function(e) {
   }
 
   // Validate dates
+  if (new Date(checkin.value) <= new Date(today)) {
+    showError('Check-in date must be after today');
+    return;
+  }
   if (new Date(checkout.value) <= new Date(checkin.value)) {
     showError('Checkout date must be after check-in date');
     return;
@@ -111,7 +112,7 @@ bookingForm.addEventListener('submit', function(e) {
     if (data.success) {
       showSuccess('Booking successful! Confirmation sent to your email.');
       setTimeout(() => {
-        window.location.href = 'payment.html';
+        window.location.href = 'pay.html';
       }, 2500); // Wait for the animation to finish before redirecting
     } else {
       showError('Booking failed. Please try again.');
