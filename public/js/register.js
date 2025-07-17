@@ -92,7 +92,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
       // Redirect to login page after 3 seconds
       setTimeout(() => {
         this.reset();
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }, 3000);
     }
   } catch (err) {

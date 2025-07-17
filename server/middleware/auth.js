@@ -12,7 +12,6 @@ const auth = async (req, res, next) => {
                 message: 'No token, authorization denied' 
             });
         }
-
         // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         

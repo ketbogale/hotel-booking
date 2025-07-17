@@ -5,8 +5,6 @@ const bookingSchema = new mongoose.Schema({
   checkout: { type: Date, required: true },
   rooms: { type: String, required: true },
   rate: { type: String },
-  accessible: { type: Boolean },
-  points: { type: Boolean },
   createdAt: { type: Date, default: Date.now }
 });
 module.exports = mongoose.model('Booking', bookingSchema);

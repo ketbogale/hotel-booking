@@ -85,4 +85,3 @@ module.exports.emailStyles2 = `
     }
   }
 `;
-// ... existing code ...

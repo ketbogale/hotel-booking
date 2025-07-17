@@ -56,7 +56,6 @@ exports.register = async (req, res) => {
     }
 
     // Step 2: Verify email existence using Hunter.io (TEMPORARILY DISABLED)
-  /*
     try {
       const hunterResponse = await axios.get(
         `https://api.hunter.io/v2/email-verifier?email=${encodeURIComponent(email)}&api_key=${process.env.HUNTER_API_KEY}`
@@ -71,7 +70,6 @@ exports.register = async (req, res) => {
       console.error('Hunter.io API error:', err.message);
       return res.status(500).json({ error: "Email verification failed. Please try again." });
     }
-    */
 
     // Step 3: Hash password
     const hashedPassword = await bcrypt.hash(password, 10);

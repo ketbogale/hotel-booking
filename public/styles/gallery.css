@@ -100,6 +100,12 @@
   color: #fff;
 }
 
+.side-menu.open ~ .nav-right .book-btn,
+.side-menu.open ~ .book-btn,
+.side-menu.open + .nav-right .book-btn {
+  display: none !important;
+}
+
 @media (max-width: 600px) {
   .book-btn {
     font-size: 0.95em;
@@ -114,5 +120,37 @@
   .main-nav .nav-right {
     flex-direction: column;
     align-items: stretch;
+  }
+  .side-menu {
+    width: 80vw;
+    min-width: 0;
+    max-width: 90vw;
+    padding: 0;
+  }
+  .side-menu-header {
+    padding: 0.7rem 0.8rem 0.7rem 0.8rem;
+  }
+  .side-menu-logo {
+    height: 26px;
+    margin-left: 0.5rem;
+  }
+  .close-btn {
+    font-size: 1.3rem;
+  }
+  .side-menu-nav {
+    padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+    gap: 0.7rem;
+  }
+  .side-menu-nav a {
+    font-size: 1.05rem;
+    padding: 0.3rem 0;
+  }
+  .side-menu-nav i {
+    font-size: 1.1rem !important;
+  }
+  .side-menu.open ~ .nav-right .book-btn,
+  .side-menu.open ~ .book-btn,
+  .side-menu.open + .nav-right .book-btn {
+    display: none !important;
   }
 }
