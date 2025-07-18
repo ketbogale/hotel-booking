@@ -1,7 +1,7 @@
 ﻿# Hotel Booking System Project
 This project is intended for hotel booking system or reservation for anyone who 
 want to book hotel.
-This for education purpose not fukky function
+This for education purpose not fully functional
 
 ---
 
