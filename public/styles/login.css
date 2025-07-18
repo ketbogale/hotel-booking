@@ -383,7 +383,6 @@ form {
 
 /* Success Icon Animation */
 .error-message.success::after {
-  content: "✓";
   position: absolute;
   right: 15px;
   top: 50%;
@@ -394,7 +393,6 @@ form {
 
 /* Error Icon Animation */
 .error-message.error::after {
-  content: "✗";
   position: absolute;
   right: 15px;
   top: 50%;
