@@ -33,7 +33,7 @@ loginForm.addEventListener('submit', async function(e) {
   }
 
   try {
-    const response = await fetch('http://localhost:5000/api/auth/login', {
+    const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -42,7 +42,7 @@ loginForm.addEventListener('submit', async function(e) {
     if (result.success && result.token) {
       localStorage.setItem('token', result.token);
       // Fetch user profile after login to get name and email
-      fetch('http://localhost:5000/api/auth/me', {
+      fetch('/api/auth/me', {
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + result.token }
       })
@@ -122,7 +122,7 @@ sendResetBtn.addEventListener('click', async function() {
   }
   // Send request to backend
   try {
-    const res = await fetch('http://localhost:5000/api/auth/forgot-password', {
+    const res = await fetch('/api/auth/forgot-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })

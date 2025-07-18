@@ -39,7 +39,7 @@ if (bookingData && bookingData.checkin) {
     title: 'Hotel Booking Payment',
     description: 'Payment for hotel booking',
     callback: function(response) {
-      fetch('http://localhost:5000/api/payment/verify?tx_ref=' + response.tx_ref, {
+      fetch('/api/payment/verify?tx_ref=' + response.tx_ref, {
         method: 'GET'
       })
       .then(res => res.json())

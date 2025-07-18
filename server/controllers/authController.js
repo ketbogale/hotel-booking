@@ -55,19 +55,21 @@ exports.register = async (req, res) => {
       return res.status(400).json({ error: 'Email already registered.' });
     }
 
-    // Step 2: Verify email existence using Hunter.io (TEMPORARILY DISABLED)
+    // Step 2: Verify email existence using EmailListVerify
     try {
-      const hunterResponse = await axios.get(
-        `https://api.hunter.io/v2/email-verifier?email=${encodeURIComponent(email)}&api_key=${process.env.HUNTER_API_KEY}`
+      console.log('Verifying email with EmailListVerify:', email);
+      const verifyResponse = await axios.get(
+        `https://apps.emaillistverify.com/api/verifyEmail?secret=${process.env.EMAIL_LIST_VERIFY_KEY}&email=${encodeURIComponent(email)}`
       );
-      const result = hunterResponse.data.data;
-      
-      // Check if email is invalid or undeliverable
-      if (result.result === "undeliverable" || result.status === "invalid") {
-        return res.status(400).json({ error: "Please insert existing email." });
+      console.log('EmailListVerify response:', verifyResponse.data);
+      const result = verifyResponse.data;
+
+      // EmailListVerify returns "ok" for valid emails
+      if (result !== "ok") {
+        return res.status(400).json({ error: "Please enter a valid, deliverable email address." });
       }
     } catch (err) {
-      console.error('Hunter.io API error:', err.message);
+      console.error('EmailListVerify API error:', err.message);
       return res.status(500).json({ error: "Email verification failed. Please try again." });
     }
 

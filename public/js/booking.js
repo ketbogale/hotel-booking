@@ -99,7 +99,7 @@ bookingForm.addEventListener('submit', function(e) {
   localStorage.setItem('bookingData', JSON.stringify(formData));
 
   // Send booking data to backend for DB storage and email
-  fetch('http://localhost:5000/api/booking', {
+  fetch('/api/booking', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
