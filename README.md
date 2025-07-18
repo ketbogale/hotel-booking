@@ -1,28 +1,31 @@
 ﻿# Hotel Booking System Project
-Absolutely! Here’s a simple and effective `README.md` template for your Hotel Booking Project.  
-You can copy and paste this into your `README.md` file and customize as needed:
+This project is intended for hotel booking system or reservation for anyone who 
+want to book hotel.
+This for education purpose not fukky function
 
 ---
 
 ```markdown
-# HotelBookingProject
+# Hotel Booking Project
 
-A modern hotel booking web application with a Node.js/Express backend and a responsive HTML/CSS/JavaScript frontend.
+A modern hotel booking web application with a Node.js as backend and a responsive HTML/CSS/JavaScript frontend.
 
 ## Features
 
 - User registration and login
 - Secure password reset via email
 - Email notifications for users and admins
+- Booking notifications for user with their details
 - Room gallery and booking pages
 - Modern, responsive design
+- Easy online payment via chapa
 
 ## Technologies Used
 
 - **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Node.js, Express.js
+- **Backend:** Node.js
 - **Database:** MongoDB
-- **Email:** Nodemailer (Gmail SMTP)
+- **Email:** Nodemailer (Gmail SMTP), Gmail app password
 
 ## Getting Started
 
@@ -31,13 +34,13 @@ A modern hotel booking web application with a Node.js/Express backend and a resp
 - Node.js and npm installed
 - MongoDB installed and running
 - A Gmail account for sending emails
+- Gmail app password for security
 
 ### Installation
 
 1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/HotelBookingProject.git
-   cd HotelBookingProject/server
+ - Creating repository called hotelbooking
+ - Push it to github repository 
    ```
 
 2. Install backend dependencies:
@@ -51,7 +54,7 @@ A modern hotel booking web application with a Node.js/Express backend and a resp
    EMAIL_USER=your_gmail_address
    EMAIL_PASS=your_gmail_app_password
    ADMIN_EMAIL=admin@example.com
-   PORT=5000
+   Use .gitignore for this and it is not visible in the hard code
    ```
 
 4. Start the backend server:
@@ -76,13 +79,18 @@ HotelBookingProject/
     models/
     routes/
     server.js
+  package-lock.json
+  package.json
   README.md
+
 ```
 
 ## License
 
-This project is for educational purposes.
+This project is for educational purposes
+Just for developing skill
 
 ---
 
-Feel free to modify this template to better fit your project! If you want a more detailed or customized README, just let me know what to add.
+Feel free to modify this template to better fit your project! 
+If you want a more detailed or customized README
