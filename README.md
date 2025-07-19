@@ -39,8 +39,9 @@ A modern hotel booking web application with a Node.js as backend and a responsiv
 
 1. Clone the repository:
  - Creating repository called hotelbooking
- - Push it to github repository 
+ - Push it to github repository
    ```
+   git remote add origin https://github.com/yourusername/your-repo.git
 
 2. Install backend dependencies:
    ```sh
