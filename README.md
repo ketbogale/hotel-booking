@@ -5,7 +5,6 @@ This for education purpose not fully functional
 
 ---
 
-```markdown
 # Hotel Booking Project
 
 A modern hotel booking web application with a Node.js as backend and a responsive HTML/CSS/JavaScript frontend.
