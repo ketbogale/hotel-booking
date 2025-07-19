@@ -1,7 +1,7 @@
 ﻿# Hotel Booking System Project
-This project is intended for hotel booking system or reservation for anyone who 
-want to book hotel.
-This for education purpose not fully functional
+- This project is intended for hotel booking system or reservation for 
+ anyone who want to book hotel.
+- This for education purpose not fully functional
 
 ---
 
@@ -85,6 +85,8 @@ HotelBookingProject/
   README.md
 
 ```
+# Limitation
+one of the limitation is that on payment. I try to use Chapa for payment but I am in test mode not real mode to pay real money transfer
 
 ## License
 
