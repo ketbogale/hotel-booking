@@ -22,17 +22,17 @@ A modern hotel booking web application with a Node.js as backend and a responsiv
 
 ## Technologies Used
 
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend:** Node.js
-- **Database:** MongoDB
-- **Email:** Nodemailer (Gmail SMTP), Gmail app password
+- Frontend: HTML, CSS, JavaScript
+- Backend: Node.js
+- Database: Cloud MongoDB
+- Email: Nodemailer (Gmail SMTP), Gmail app password
 
 ## Getting Started
 
 ### Prerequisites
-
+- Email verification 
 - Node.js and npm installed
-- MongoDB installed and running
+- MongoDB installed and running or using cloud mongo atlas
 - A Gmail account for sending emails
 - Gmail app password for security
 
@@ -50,7 +50,7 @@ A modern hotel booking web application with a Node.js as backend and a responsiv
 
 3. Create a `.env` file in the `server` directory with the following content:
    ```
-   MONGO_URI=your_mongodb_connection_string
+   MONGO_URI=your_mongodb_connection_string or cloud or local mongo compass
    EMAIL_USER=your_gmail_address
    EMAIL_PASS=your_gmail_app_password
    ADMIN_EMAIL=admin@example.com
