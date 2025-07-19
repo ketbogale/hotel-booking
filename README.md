@@ -59,7 +59,8 @@ A modern hotel booking web application with a Node.js as backend and a responsiv
 
 4. Start the backend server:
    ```sh
-   npm start
+   Start from node server/server.js from the root or cd server
+   and then write server.js in terminal
    ```
 
 5. Open `public/html/index.html` in your browser to view the frontend.
