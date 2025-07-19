@@ -86,7 +86,8 @@ HotelBookingProject/
 
 ```
 # Limitation
-one of the limitation is that on payment. I try to use Chapa for payment but I am in test mode not real mode to pay real money transfer
+One of the limitation on payment. 
+I try to use Chapa for payment but I am in test mode not real mode to pay real money transfer
 
 ## License
 
