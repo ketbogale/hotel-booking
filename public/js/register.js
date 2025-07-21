@@ -39,7 +39,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
   }
 
   // Helper to show success
-  function showSuccess(message) {
+  function showSuccess(message ) {
     errorDiv.textContent = message;
     errorDiv.classList.add('active', 'success');
     errorDiv.classList.remove('error');

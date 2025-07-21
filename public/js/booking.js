@@ -1,9 +1,9 @@
-
 // Date handling functions
 function todayString() {
   const today = new Date();
   return today.toISOString().split('T')[0];
 }
+
 function addDays(dateStr, days) {
   const date = new Date(dateStr);
   date.setDate(date.getDate() + days);
@@ -45,6 +45,7 @@ function showError(message) {
     hideError();
   }, 3000);
 }
+
 function hideError() {
   const errorDiv = document.getElementById('bookingError');
   errorDiv.classList.add('fadeout');
@@ -72,7 +73,7 @@ bookingForm.addEventListener('submit', function(e) {
   const user = JSON.parse(localStorage.getItem('user'));
   const token = localStorage.getItem('token');
   if (!user || !user.email || !token) {
-    window.location.href = 'html/login.html';
+    window.location.href = 'login.html';
     return;
   }
 
@@ -89,37 +90,26 @@ bookingForm.addEventListener('submit', function(e) {
 
   // Collect form data
   const formData = {
+    email: user.email,
     checkin: checkin.value,
     checkout: checkout.value,
     rooms: document.getElementById('rooms').value,
-    rate: document.getElementById('rate').value
+    rate: document.getElementById('rate').value,
+    amount: "100" // Default amount, can be calculated dynamically
   };
 
-  // Save booking data to localStorage (optional, for payment page)
+  // Save booking data to localStorage for payment page
   localStorage.setItem('bookingData', JSON.stringify(formData));
 
-  // Send booking data to backend for DB storage and email
-  fetch('/api/booking', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    },
-    body: JSON.stringify(formData)
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      showSuccess('Booking successful! Confirmation sent to your email.');
-      setTimeout(() => {
-        window.location.href = 'pay.html';
-      }, 2500); // Wait for the animation to finish before redirecting
-    } else {
-      showError('Booking failed. Please try again.');
-    }
-  })
-  .catch(() => showError('Booking failed. Please try again.'));
+  // Generate a simple tx_ref for payment
+  const tx_ref = 'tx_' + Date.now();
+  localStorage.setItem('tx_ref', tx_ref);
+
+  // Redirect to payment page
+  window.location.href = 'pay.html';
 });
+
+// Success message helper
 function showSuccess(message) {
   const successDiv = document.getElementById('bookingSuccess');
   successDiv.textContent = message;
@@ -132,4 +122,4 @@ function showSuccess(message) {
   setTimeout(() => {
     successDiv.style.display = 'none';
   }, 2500);
-}
+} 

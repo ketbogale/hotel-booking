@@ -16,12 +16,6 @@
   font-weight: 400;
 }
 
-.gallery-nav {
-  position: relative;
-  padding-bottom: 32px;
-
-}
-
 .gallery-content {
   background: #fff;
   margin: 0 auto;
@@ -55,18 +49,8 @@
   box-shadow: 0 2px 12px rgba(44,37,84,0.08);
   background: #eee;
 }
-.gallery-nav{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #231c4c;
-  padding: 0.7rem 2vw;
-  position: sticky;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 100;
-  transition: background 0.3s, box-shadow 0.3s;
+.gallery-images img:hover {
+  transform: scale(1.02);
 }
 @media (max-width: 900px) {
   .gallery-images img {

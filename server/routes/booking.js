@@ -1,67 +1,22 @@
+
+// server/routes/booking.js
 const express = require('express');
 const router = express.Router();
-const Booking = require('../models/booking');
-const User = require('../models/User');
-const auth = require('../middleware/auth');
-const transporter = require('../config/mailer');
-const emailStyles1 = require('../email/emailStyles1');
-// POST /api/booking
-router.post('/', auth, async (req, res) => {
+const Booking = require('../models/booking'); // Use lowercase to match the file name
+
+router.post('/create', async (req, res) => {
+  console.log('[Booking Create] Incoming request body:', req.body);
+  const { email, checkin, checkout, rooms, rate, amount } = req.body;
+  const tx_ref = 'tx_' + Date.now(); // or use Chapa's tx_ref
+
   try {
-    const user = req.user;
-    const { checkin, checkout, rooms, rate } = req.body;
-
-    // Save booking to DB
-    const booking = new Booking({
-      user: user._id,
-      checkin,
-      checkout,
-      rooms,
-      rate
-    });
-    await booking.save();
-
-    // Send beautiful confirmation email to user
-    await transporter.sendMail({
-      to: user.email,
-      from: process.env.EMAIL_USER,
-      subject: 'Your Booking Confirmation - Africa Hotel',
-      html: `
-        <html>
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <style>
-            ${emailStyles1}
-          </style>
-        </head>
-        <body>
-          <div class="email-container">
-            <div class="brand">AFRICA HOTEL<sup>®</sup></div>
-            <h2>Booking Confirmation</h2>
-            <p>Dear <b>${user.firstName || user.name || 'Guest'}</b>,</p>
-            <p>Thank you for booking with Africa Hotel! Here are your booking details:</p>
-            <ul>
-              <li><span class="label">Check-In:</span> ${new Date(booking.checkin).toLocaleDateString()}</li>
-              <li><span class="label">Checkout:</span> ${new Date(booking.checkout).toLocaleDateString()}</li>
-              <li><span class="label">Rooms & Guests:</span> ${booking.rooms}</li>
-              <li><span class="label">Rate:</span> ${booking.rate || 'Standard'}</li>
-            </ul>
-            <p style="margin-top:18px;">We look forward to welcoming you! If you have any questions, reply to this email or call us at <b>+251 963 367 651</b>.</p>
-            <div class="footer">
-              Africa Hotel Booking System &copy; ${new Date().getFullYear()}
-            </div>
-          </div>
-        </body>
-        </html>
-      `
-    });
-
-    res.json({ success: true, booking });
+    const booking = await Booking.create({ tx_ref, email, checkin, checkout, rooms, rate, amount });
+    console.log(`[Booking Create] Booking created with tx_ref: ${tx_ref} for email: ${email}`);
+    // Pass tx_ref to ChapaCheckout config in frontend
+    res.json({ tx_ref });
   } catch (err) {
-    console.error('Booking error:', err);
-    res.status(500).json({ success: false, error: 'Booking failed' });
+    console.error('[Booking Create] Error creating booking:', err.stack || err);
+    res.status(500).json({ error: 'Failed to create booking', details: err.message });
   }
 });
-
 module.exports = router;

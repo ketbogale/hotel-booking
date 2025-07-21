@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
+
 const bookingSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  checkin: { type: Date, required: true },
-  checkout: { type: Date, required: true },
+  tx_ref: { type: String, required: true, unique: true },
+  email: { type: String, required: true },
+  checkin: { type: String, required: true },
+  checkout: { type: String, required: true },
   rooms: { type: String, required: true },
   rate: { type: String },
+  amount: { type: String },
   createdAt: { type: Date, default: Date.now }
 });
-module.exports = mongoose.model('Booking', bookingSchema);
+
+// Prevent OverwriteModelError in dev/hot-reload
+module.exports = mongoose.models.Booking || mongoose.model('Booking', bookingSchema);

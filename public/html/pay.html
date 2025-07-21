@@ -350,6 +350,7 @@
                 <div class="chapa-spinner"></div>
                 <p>Please wait while we process your payment...</p>
             </div>
+            <button id="chapa-pay-button" onclick="createBookingAndPay()">Pay Now</button>
         </div>
     </div>
     <script>
@@ -365,30 +366,59 @@
             summaryItem('🏁', 'Checkout:', bookingData.checkout) +
             summaryItem('🛏', 'Rooms & Guests:', bookingData.rooms) +
             summaryItem('🏷', 'Rate:', bookingData.rate || 'Standard') +
-            summaryItem('💵', 'Amount:', (bookingData.amount ? bookingData.amount + ' ETB' : '1000 ETB'));
+            summaryItem('💵', 'Amount:', (bookingData.amount ? bookingData.amount + ' ETB' : '100 ETB'));
         } else {
           summaryDiv.innerHTML = '<em>No booking data found.</em>';
         }
-    </script>
-    <script>
-        const chapa = new ChapaCheckout({
-            publicKey: 'CHAPUBK_TEST-Bs25zCzE4kQ2FteIcKUrvxilIFIeiye5',
-            customizations: {
-                buttonText: 'Pay Now'
-            },
-            availablePaymentMethods: ['chapa', 'cbebirr', 'telebirr', 'mpesa', 'ebirr'],
-            showPaymentMethodsNames: false,
-            amount: '100', 
-            currency: 'ETB',
-            mobile: '', 
 
-        
-            callbackUrl: 'https://webhook.site/9ef322ef-edeb-42e2-b4a3-50b7f1ac4e6f',
-        });
-
-        chapa.initialize();
+        async function createBookingAndPay() {
+          // Get booking data from localStorage
+          const bookingData = JSON.parse(localStorage.getItem('bookingData') || '{}');
+          if (!bookingData.email) {
+            alert('No booking data found. Please start your booking again.');
+            return;
+          }
+          // Show loading spinner
+          document.getElementById('chapa-loading-container').style.display = 'block';
+          document.getElementById('chapa-error-container').style.display = 'none';
+          try {
+            const response = await fetch('http://localhost:5000/api/booking/create', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(bookingData)
+            });
+            const result = await response.json();
+            if (!result.tx_ref) {
+              document.getElementById('chapa-loading-container').style.display = 'none';
+              document.getElementById('chapa-error-container').style.display = 'block';
+              document.getElementById('chapa-error-container').textContent = 'Failed to create booking. Please try again.';
+              return;
+            }
+            // Save tx_ref for payment
+            localStorage.setItem('tx_ref', result.tx_ref);
+            // Now start Chapa payment with the correct tx_ref
+            const chapa = new ChapaCheckout({
+              publicKey: 'CHAPUBK_TEST-Bs25zCzE4kQ2FteIcKUrvxilIFIeiye5',
+              customizations: { buttonText: 'Pay Now' },
+              availablePaymentMethods: ['chapa', 'cbebirr', 'telebirr', 'mpesa', 'ebirr'],
+              showPaymentMethodsNames: false,
+              amount: bookingData.amount || '100',
+              currency: 'ETB',
+              mobile: '',
+              tx_ref: result.tx_ref, // Use the tx_ref from backend
+              callbackUrl: 'http://localhost:5000/api/payment/verify',
+              returnUrl: 'http://localhost:5000/html/thank-you.html'
+            });
+            chapa.initialize();
+            document.getElementById('chapa-loading-container').style.display = 'none';
+          } catch (err) {
+            document.getElementById('chapa-loading-container').style.display = 'none';
+            document.getElementById('chapa-error-container').style.display = 'block';
+            document.getElementById('chapa-error-container').textContent = 'Error creating booking: ' + err.message;
+          }
+        }
     </script>
     <script src="../js/main.js"></script>
-    <script src="../js/payment.js"></script>
+    
 </body>
 </html>

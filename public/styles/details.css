@@ -27,8 +27,6 @@ body {
   align-items: center;
   gap: 1.2em;
   color: #444;
-
-
 }
 .top-bar-right i {
   font-size: 1.3em;
@@ -51,12 +49,6 @@ a {
   padding: 0.7rem 2vw;
   font-size: 1.08rem;
   border-bottom: 1px solid gold;
-}
-.main-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.7rem 2vw;
   position: sticky;
   left: 0;
   right: 0;
@@ -67,9 +59,8 @@ a {
 
 /* Add this new class for scrolled state */
 .main-nav.scrolled {
-  /*background: #22303a; */
    background: hsl(249, 60%, 43%);
-  box-shadow: 0 2px 16px rgba(44,62,80,0.13);
+   box-shadow: 0 2px 16px rgba(44,62,80,0.13);
 }
 .nav-left, .nav-center, .nav-right {
   display: flex;
@@ -144,6 +135,7 @@ a {
 .side-menu-header {
   display: flex;
   align-items: center;
+  background: rgb(36, 117, 36);
   justify-content: space-between;
   padding: 1.2rem 1.5rem 1.2rem 1.5rem;
   border-bottom: 1px solid goldenrod;
@@ -167,9 +159,6 @@ a {
   padding: 2.5rem 2.5rem 1.5rem 2.5rem;
   flex: 1;
 }
-.side-menu-header {
-  background: rgb(36, 117, 36);
-}
 .side-menu-nav a {
   color: #fff;
   font-size: 1.45rem;
@@ -189,15 +178,6 @@ a {
   border-radius: 4px;
   cursor: pointer !important;
 }
-
-.side-menu-footer {
-  background: #d7e2ec;
-  color: #222;
-  padding: 1.2rem 1.5rem;
-  border-top: 1px solid #bbb;
-  font-size: 1.1rem;
-}
-
 .locations-dropdown {
   cursor: pointer;
   font-weight: 600;
@@ -454,7 +434,7 @@ a {
 }
 
 .room-card:hover {
-  box-shadow: 0 8px 32px rgba(44, 37, 84, 0.16);
+  box-shadow: 0 8px 32px rgba(23, 41, 196, 0.959);
 }
 
 .room-img img {

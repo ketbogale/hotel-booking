@@ -18,7 +18,6 @@ document.getElementById('sideMenuOverlay').onclick = function() {
         topBarLinks.classList.toggle('show');
       });
     }
-    // Add this script before </body> in your index.html
 window.addEventListener('scroll', function() {
   const nav = document.querySelector('.main-nav');
   if (window.scrollY > 10) {
